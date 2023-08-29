@@ -1,0 +1,4224 @@
+{
+	"info": {
+		"_postman_id": "00531815-3d19-44a7-9ca4-854023265750",
+		"name": "Swagger API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create users",
+					"item": [
+						{
+							"name": "Create new user with empty value in userName",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"1\",\r\n    \"userName\":\"\",\r\n    \"password\":\"myPuranoPassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create new user with valid username and password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 6,\r\n    \"userName\":\"Poster\",\r\n    \"password\":\"Pastor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create new user with empty value in id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"\",\r\n    \"userName\":\"hinrean\",\r\n    \"password\":\"gheraliuweb\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create new user with existing user id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 409\", function () {\r",
+											"    pm.response.to.have.status(409);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":1,\r\n    \"userName\":\"User 1\",\r\n    \"password\":\"Password 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create new user with empty value in password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":3,\r\n    \"userName\":\"testuser\",\r\n    \"password\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get users",
+					"item": [
+						{
+							"name": "get list of users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"_.each(pm.response.json(), (item, index) => { \r",
+											"    pm.globals.set(`userid${index + 1}`, JSON.stringify(item.id))\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific request by valid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid3}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid3}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific user by invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid129}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid129}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific user by query parameter",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Users?userName=User500",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users"
+									],
+									"query": [
+										{
+											"key": "userName",
+											"value": "User500"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update users",
+					"item": [
+						{
+							"name": "update user with empty value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n    \"userName\":\"User69\",\r\n    \"password\": \"passon\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid5}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid5}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user with empty value for username",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":9,\r\n    \"userName\":\"\",\r\n    \"password\":\"nayaPassword9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid9}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid9}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user with empty value for password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":9,\r\n    \"userName\":\"NayaUser\",\r\n    \"password\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users/7",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user with invalid value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": false,\r\n    \"userName\":\"NayaUser\",\r\n    \"password\":\"nayaPassword9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid1}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user with invalid value for username or password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":9,\r\n    \"userName\": false,\r\n    \"password\": 69\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid3}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid3}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user with valid value for all fields",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":9,\r\n    \"userName\":\"NayaUser\",\r\n    \"password\":\"nayaPassword9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid9}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid9}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete users",
+					"item": [
+						{
+							"name": "delete user with valid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid3}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid3}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete user with invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Users/{{userid129}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Users",
+										"{{userid129}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Activity",
+			"item": [
+				{
+					"name": "Get activity",
+					"item": [
+						{
+							"name": "get list of activity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"_.each(pm.response.json(), (item, index) => { \r",
+											"    pm.globals.set(`activityid${index + 1}`, JSON.stringify(item.id))\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get activity by valid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid7}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid7}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get activity by invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid1613}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid1613}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create activity",
+					"item": [
+						{
+							"name": "create activity with empty value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"\",\r\n    \"title\":\"florida\",\r\n    \"dueDate\":\"2023-07-30T08:50:00.620Z\",\r\n    \"completed\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create activity for invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"udi\",\r\n  \"title\": \"beekeeping\",\r\n  \"dueDate\": \"2023-07-03T08:44:00.620Z\",\r\n  \"completed\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create activity with empty value for title",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 11,\r\n    \"title\":\"\",\r\n    \"dueDate\":\"2023-10-05T03:14:00.620Z\",\r\n    \"completed\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "creating activity with invalid title",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"title\": f0,\r\n    \"dueDate\":\"2024-02-01T05:06:22.720Z\",\r\n    \"completed\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "creating activity with empty value for dueDate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":7,\r\n    \"title\":\"giovanni\",\r\n    \"dueDate\":\"\",\r\n    \"completed\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "creating activity with invalid dueDate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 3,\r\n    \"title\": \"beekeeping\",\r\n    \"dueDate\": \"67heart\",\r\n    \"completed\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "creating activity with empty value for completed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":12,\r\n    \"title\":\"keyliner\",\r\n    \"dueDate\":\"2024-02-01T05:06:22.620Z\",\r\n    \"completed\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "creating activity with invalid completed value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":5,\r\n    \"title\":\"goteam\",\r\n    \"dueDate\":\"2025-04-19T05:44:02.620Z\",\r\n    \"completed\": \"nottrue\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "creating activity with valid values for all field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":23,\r\n    \"title\":\"roadback\",\r\n    \"dueDate\":\"2023-07-03T09:00:00.328Z\",\r\n    \"completed\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update activity",
+					"item": [
+						{
+							"name": "updating activity with valid value",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 3,\r\n    \"title\":\"Updatedact\",\r\n    \"dueDate\":\"2030-05-05T09:05:06.620Z\",\r\n    \"completed\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid3}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid3}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updtaing non existing activity id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 161,\r\n    \"title\":\"florida\",\r\n    \"dueDate\":\"2030-05-05T09:05:06.620Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid1613}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid1613}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating activity with empty value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n    \"title\":\"danish\",\r\n    \"dueDate\":\"2030-05-05T09:05:06.620Z\",\r\n    \"completed\": true\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid10}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid10}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating activity with empty value for title",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":33,\r\n    \"title\": \"\",\r\n    \"dueDate\": \"2030-05-05T09:05:06.620Z\",\r\n    \"completed\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid11}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid11}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating activity with invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"real\",\r\n    \"title\":\"realest\",\r\n    \"duedate\":\"2050-05-05T09:05:06.620Z\",\r\n    \"completed\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid12}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid12}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating activity with empty value for dueDate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":12,\r\n    \"title\":\"Beekeeping\",\r\n    \"dueDate\":\"\",\r\n    \"completed\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid11}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid11}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating activity with invalid value for completed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":2,\r\n    \"title\": \"ACtivity2\",\r\n    \"dueDate\":\"2030-05-05T09:05:06.620Z\",\r\n    \"completed\":\"notreally\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid11}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid11}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating activity with invalid value for duedate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":33,\r\n    \"title\": \"solarpanel\",\r\n    \"dueDate\": \"2030/2/22 T08:0Z\",\r\n    \"completed\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid12}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid12}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete activity",
+					"item": [
+						{
+							"name": "delete activity with valid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid11}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid11}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete activity with invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Activities/{{activityid1613}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Activities",
+										"{{activityid1613}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Create authors",
+					"item": [
+						{
+							"name": "create author with empty value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"\",\r\n  \"idBook\": 120,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create author with valid values",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 46,\r\n  \"idBook\": 550,\r\n  \"firstName\": \"george rr\",\r\n  \"lastName\": \"martin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create author with empty value for idbook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 22,\r\n  \"idBook\": \"\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create author wih invalid value for idbook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 30,\r\n  \"idBook\": \"null\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create author with invalid value for name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 10,\r\n  \"idBook\": 30,\r\n  \"firstName\": 44,\r\n  \"lastName\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create author with empty value for firstName and lastname",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 4 ,\r\n  \"idBook\": 334,\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create author with invalid value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"number1\",\r\n  \"idBook\": 530,\r\n  \"firstName\": \"stringy\",\r\n  \"lastName\": \"stringy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get authors",
+					"item": [
+						{
+							"name": "get list of all authors",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"_.each(pm.response.json(), (item, index) => { \r",
+											"    pm.globals.set(`authorid${index + 1}`, JSON.stringify(item.id))\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get authors by valid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid16}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid16}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get authors by valid idbook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors/authors/books/33",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"authors",
+										"books",
+										"33"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get authors by invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid1004}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid1004}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get authors by invalid idbook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors/authors/books/183023",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"authors",
+										"books",
+										"183023"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update authors",
+					"item": [
+						{
+							"name": "empty id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"\",\r\n  \"idBook\": 440,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid10}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid10}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "empty idbook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 72,\r\n  \"idBook\": \"\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid10}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid10}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "empty names",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 60,\r\n  \"idBook\": 60,\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid10}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid10}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"twelfth\",\r\n  \"idBook\": 33,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid10}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid10}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "invalid idbook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 45,\r\n  \"idBook\": \"toomany\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid10}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid10}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "invalid name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 123,\r\n  \"idBook\": 353,\r\n  \"firstName\": 560,\r\n  \"lastName\": 34.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid10}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid10}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "valid request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 120,\r\n  \"idBook\": 333,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid120}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete authors",
+					"item": [
+						{
+							"name": "delete authors with valid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid21}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid21}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete authors with invalid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors/{{authorid1004}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"{{authorid1004}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete authors by idbook value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 405\", function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Authors/authors/books/36",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Authors",
+										"authors",
+										"books",
+										"36"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Add Books",
+					"item": [
+						{
+							"name": "add books with valid value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with empty value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\":\"\" ,\r\n  \"title\": \"\",\r\n  \"description\": \"\",\r\n  \"pageCount\": \"\",\r\n  \"excerpt\": \"\",\r\n  \"publishDate\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with empty title and description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"\",\r\n  \"description\": \"\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with empty id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"\",\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with empty pageCount",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": \"\",\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with empty excerpt",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add book with empty publish date",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add book with invalid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"klingon\",\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with invalid title and description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": 50shades,\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with invalid excerpt",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": false,\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with invalid pagezcount",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": \"zedrode\",\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add books with invalid publish date",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023/07/24\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Books",
+					"item": [
+						{
+							"name": "get list of all books",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"_.each(pm.response.json(), (item, index) => { \r",
+											"    pm.globals.set(`bookid${index + 1}`, JSON.stringify(item.id))\r",
+											"})\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Books",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific book by valid id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get book by invalid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid1133}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid1133}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update Books",
+					"item": [
+						{
+							"name": "update book with empty value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"\",\r\n  \"title\": \"\",\r\n  \"description\": \"\",\r\n  \"pageCount\": \"\",\r\n  \"excerpt\": \"\",\r\n  \"publishDate\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with empty id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"\",\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update bok with empty title and description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"\",\r\n  \"description\": \"\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with empty value for pageCount",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": \"\",\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with invalid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"trending\",\r\n  \"title\": \"stringing\",\r\n  \"description\": \"stringring\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"stringeroo\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with invalid pageCount value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": \"reallylong\",\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with invalid excerpt value",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 120,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 2300,\r\n  \"excerpt\": 23,\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with invalid publish date value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 100,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023/07/03\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with empty publish date",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 20,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": \"230\",\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid35}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid35}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update book with valid value for all",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 120,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 2300,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-07-03T11:42:06.052Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Books",
+					"item": [
+						{
+							"name": "delete books with valid id as path",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid120}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid120}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete books with invalid id as path",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Books/{{bookid1133}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Books",
+										"{{bookid1133}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CoverPhoto",
+			"item": [
+				{
+					"name": "Create CoverPhotos",
+					"item": [
+						{
+							"name": "create coverphoto with valid value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 10,\r\n  \"idBook\": 26,\r\n  \"url\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create cover photo with empty value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n    \"idBook\": 27,\r\n    \"url\": \"some_url.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create cover photo with empty value for idBook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 10,\r\n  \"idBook\": \"\",\r\n  \"url\": \"some_string.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create coverphoto with empty value for url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"id\": 10,\r\n  \"idBook\": 26,\r\n  \"url\": \"\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create coverphoto with invalid value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"12luck0\",\r\n  \"idBook\": 26,\r\n  \"url\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create coverphoto with invalid idBook value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 100,\r\n  \"idBook\": false\r\n  \"url\": \"stringface\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "invalid url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\r\n{\r\n  \"id\": 10,\r\n  \"idBook\": 26,\r\n  \"url\": false\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get CoverPhotos",
+					"item": [
+						{
+							"name": "get list of coverPhotos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"_.each(pm.response.json(), (item, index) => { \r",
+											"    pm.globals.set(`coverid${index + 1}`, JSON.stringify(item.id))\r",
+											"})\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific coverphoto by valid idbook value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/books/covers/44",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"books",
+										"covers",
+										"44"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific coverphoto by invalid idbook value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/books/covers/44009900",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"books",
+										"covers",
+										"44009900"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific coverphoto by valid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid100}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid100}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specific coverphoto by invalid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid364529}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid364529}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update CoverPhotos",
+					"item": [
+						{
+							"name": "updating coverphoto with valid values",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 100,\r\n  \"idBook\": 90,\r\n  \"url\": \"updated_string.to\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating coverphoto with empty value for id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"\",\r\n  \"idBook\": 49,\r\n  \"url\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating coverphoto with empty value for idbook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 12,\r\n  \"idBook\": \"\",\r\n  \"url\": \"stringcheese.love\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating coverphoto with empty value for url",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 37,\r\n  \"idBook\": 36,\r\n  \"url\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating coverphoto with invalid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"glory\",\r\n  \"idBook\": 20,\r\n  \"url\": \"string\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating coverphoto with invalid idbook value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 44,\r\n  \"idBook\": \"fifty\",\r\n  \"url\": \"stringerringer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updating coverphoto with invalid url value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 30,\r\n  \"idBook\": 60,\r\n  \"url\": 4500\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{swagURL}}/Coverphotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Coverphotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete CoverPhotos",
+					"item": [
+						{
+							"name": "deleting coverphoto with valid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/{{coverid33}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"{{coverid33}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleting coverphoto with invalid id value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/Coverphotos/{{coverid364529}}",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"Coverphotos",
+										"{{coverid364529}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleting coverphoto with valid idbook value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 405\", function () {\r",
+											"    pm.response.to.have.status(405);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{swagURL}}/CoverPhotos/books/covers/44",
+									"host": [
+										"{{swagURL}}"
+									],
+									"path": [
+										"CoverPhotos",
+										"books",
+										"covers",
+										"44"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
